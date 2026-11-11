@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Id": "io.github.gabrielwsa.aiusagemeter",
+        "Name": "AI Usage Meter",
+        "Name[pt_BR]": "Medidor de uso de IA",
+        "Name[es]": "Medidor de uso de IA",
+        "Description": "Unofficial meter for Claude Code plan limits (5h session and weekly)",
+        "Description[pt_BR]": "Medidor não oficial dos limites do plano do Claude Code (sessão de 5h e semanal)",
+        "Description[es]": "Medidor no oficial de los límites del plan de Claude Code (sesión de 5h y semanal)",
+        "Icon": "office-chart-ring",
+        "Category": "System Information",
+        "Version": "1.0.0",
+        "License": "MIT",
+        "Website": "https://github.com/gabrielwsa/AIusageKDEplugin",
+        "Authors": [{ "Name": "gabriel.silva" }]
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
