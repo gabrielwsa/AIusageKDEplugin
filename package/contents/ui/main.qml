@@ -105,7 +105,7 @@ PlasmoidItem {
     toolTipSubText: !loaded ? (errText(error) || t("loading"))
         : t("tipSession") + ": " + sessionUsed.toFixed(0) + "% " + t("used") + " · " + t("resetsIn") + " " + fmtLeft(sessionResets)
           + "\n" + t("tipWeekly") + ": " + weeklyUsed.toFixed(0) + "% " + t("used") + " · " + t("resetsIn") + " " + fmtLeft(weeklyResets)
-          + "\n" + t("updated") + " " + Qt.formatTime(updated, "HH:mm")
+          + "\n" + t("updated") + " " + Qt.formatTime(updated, "HH:mm:ss")
 
     Plasmoid.icon: "utilities-system-monitor"
 
@@ -191,7 +191,7 @@ PlasmoidItem {
                 font.pixelSize: compact.fit(9)
                 text: root.error ? "⚠"
                     : root.loading ? "⟳ …"
-                    : "⟳ " + Qt.formatTime(root.updated, "HH:mm")
+                    : "⟳ " + Qt.formatTime(root.updated, "HH:mm:ss")
             }
         }
     }
@@ -232,7 +232,7 @@ PlasmoidItem {
                     font.pointSize: Kirigami.Theme.smallFont.pointSize
                     text: root.error ? "⚠ " + root.errText(root.error)
                         : root.loading ? root.t("updating")
-                        : root.t("updated") + " " + Qt.formatTime(root.updated, "HH:mm")
+                        : root.t("updated") + " " + Qt.formatTime(root.updated, "HH:mm:ss")
                 }
             }
             PC3.ToolButton {
