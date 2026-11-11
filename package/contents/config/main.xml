@@ -12,5 +12,9 @@
     <entry name="showLabels" type="Bool"><default>true</default></entry>
     <entry name="showUpdated" type="Bool"><default>true</default></entry>
     <entry name="sidePadding" type="Int"><default>6</default></entry>
+    <entry name="iconType" type="String"><default>gauge</default></entry>
+    <entry name="iconName" type="String"><default>office-chart-ring</default></entry>
+    <entry name="iconFile" type="String"><default></default></entry>
+    <entry name="barStyle" type="String"><default>rounded</default></entry>
   </group>
 </kcfg>

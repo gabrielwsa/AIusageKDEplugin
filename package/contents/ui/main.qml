@@ -32,6 +32,11 @@ PlasmoidItem {
     }
     readonly property string script: Qt.resolvedUrl("../code/usage.py").toString().replace("file://", "")
 
+    // raios usam o coral fixo (estilo Claude); o anel muda de cor com o uso
+    function iconColor() {
+        return Plasmoid.configuration.iconType === "rays" ? accent : colorFor(sessionUsed);
+    }
+
     function colorFor(used) {
         if (used >= 90) return "#e5534b";
         if (used >= 70) return "#e9a23b";
@@ -125,13 +130,15 @@ PlasmoidItem {
             height: parent.height
             spacing: compact.cfg.spacing
 
-            GaugeIcon {
+            AppIcon {
                 Layout.preferredWidth: Math.min(Math.round(Kirigami.Units.iconSizes.small * compact.cfg.logoScale / 100), compact.height - 2)
                 Layout.preferredHeight: Layout.preferredWidth
                 Layout.alignment: Qt.AlignVCenter
+                iconType: compact.cfg.iconType
+                iconName: compact.cfg.iconName
+                iconFile: compact.cfg.iconFile
                 value: root.sessionUsed
-                color: root.error ? Kirigami.Theme.negativeTextColor : root.colorFor(root.sessionUsed)
-                trackColor: Kirigami.Theme.textColor
+                color: root.error ? Kirigami.Theme.negativeTextColor : root.iconColor()
             }
 
             Repeater {
@@ -162,22 +169,16 @@ PlasmoidItem {
                         font.pixelSize: compact.fit(11)
                         font.bold: true
                     }
-                    Rectangle {   // mini barra ao lado do número
+                    UsageBar {   // mini barra ao lado do número
                         visible: compact.cfg.barHeight > 0 && compact.cfg.barWidth > 0
                         Layout.alignment: Qt.AlignVCenter
                         Layout.preferredWidth: compact.cfg.barWidth
                         Layout.preferredHeight: compact.cfg.barHeight
-                        radius: height / 2
-                        color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g,
-                                       Kirigami.Theme.textColor.b, 0.18)
-                        Rectangle {
-                            width: Math.max(modelData.used > 0 ? height : 0,
-                                            parent.width * Math.min(100, modelData.used) / 100)
-                            height: parent.height
-                            radius: parent.radius
-                            color: root.colorFor(modelData.used)
-                            Behavior on width { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
-                        }
+                        barStyle: compact.cfg.barStyle
+                        value: modelData.used
+                        color: root.colorFor(modelData.used)
+                        trackColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g,
+                                            Kirigami.Theme.textColor.b, 0.18)
                     }
                 }
             }
@@ -206,12 +207,14 @@ PlasmoidItem {
         RowLayout {   // cabeçalho
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing * 2
-            GaugeIcon {
+            AppIcon {
                 Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                 Layout.preferredHeight: Layout.preferredWidth
+                iconType: Plasmoid.configuration.iconType
+                iconName: Plasmoid.configuration.iconName
+                iconFile: Plasmoid.configuration.iconFile
                 value: root.sessionUsed
-                color: root.colorFor(root.sessionUsed)
-                trackColor: Kirigami.Theme.textColor
+                color: root.iconColor()
             }
             Kirigami.Heading { text: root.t("title"); level: 3 }
             Item { Layout.fillWidth: true }
@@ -263,24 +266,15 @@ PlasmoidItem {
                         text: root.loaded ? "<b>" + modelData.used.toFixed(0) + "%</b> " + root.t("used") : "–"
                     }
                 }
-                Rectangle {
+                UsageBar {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 10
-                    radius: 5
-                    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g,
-                                   Kirigami.Theme.textColor.b, 0.12)
-                    Rectangle {
-                        width: Math.max(modelData.used > 0 ? height : 0,
-                                        parent.width * Math.min(100, modelData.used) / 100)
-                        height: parent.height
-                        radius: parent.radius
-                        gradient: Gradient {
-                            orientation: Gradient.Horizontal
-                            GradientStop { position: 0; color: Qt.lighter(root.colorFor(modelData.used), 1.25) }
-                            GradientStop { position: 1; color: root.colorFor(modelData.used) }
-                        }
-                        Behavior on width { NumberAnimation { duration: 500; easing.type: Easing.OutCubic } }
-                    }
+                    barStyle: Plasmoid.configuration.barStyle
+                    gradient: true
+                    value: modelData.used
+                    color: root.colorFor(modelData.used)
+                    trackColor: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g,
+                                        Kirigami.Theme.textColor.b, 0.12)
                 }
                 PC3.Label {
                     visible: modelData.resets > 0

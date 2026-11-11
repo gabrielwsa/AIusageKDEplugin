@@ -57,7 +57,13 @@ Depois de instalar, procure **"Medidor de uso de IA"** na lista de widgets e arr
 
 ## Configuração
 
-Clique com o botão direito no widget → *Configurar…* → *Aparência*. Dá para ajustar o tamanho do texto e do ícone, o espaçamento, as margens, a largura e a espessura das barras, se os rótulos 5h/7d aparecem e se a hora da última atualização aparece.
+Clique com o botão direito no widget → *Configurar…* → *Aparência*.
+
+- **Ícone:** anel de uso (padrão), raios (estilo Claude), qualquer ícone do tema do sistema, uma imagem sua (SVG/PNG/JPG) ou nenhum.
+- **Estilo das barras:** arredondada, reta, segmentada, pontos ou contorno, com pré-visualização.
+- **Tamanhos:** texto, ícone, largura e espessura das barras.
+- **Espaçamento:** entre os itens e nas laterais.
+- **Mostrar ou esconder:** os rótulos 5h/7d e a hora da última atualização.
 
 ## Idiomas
 
@@ -95,6 +101,6 @@ Widget para la barra de **KDE Plasma 6** que muestra cuánto usaste de los lími
 kpackagetool6 -t Plasma/Applet -i ai-usage-meter.plasmoid
 ```
 
-Después busca **"Medidor de uso de IA"** en la lista de widgets y arrástralo a la barra. Para configurarlo: clic derecho en el widget → *Configurar…*
+Después busca **"Medidor de uso de IA"** en la lista de widgets y arrástralo a la barra. Para configurarlo: clic derecho en el widget → *Configurar…*. Puedes elegir el icono (anillo, rayos estilo Claude, icono del sistema o imagen propia), el estilo de las barras (redondeada, recta, segmentada, puntos o contorno), los tamaños y los espacios.
 
 Si aparece **"token expirado"**, abre Claude Code para que renueve la sesión.

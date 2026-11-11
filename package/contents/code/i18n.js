@@ -35,7 +35,22 @@ const STRINGS = {
         cfgBarHeight: "Espessura das barras (px):",
         cfgLabels: "Rótulos:",
         cfgShowLabels: "Mostrar \"5h\" e \"7d\"",
-        cfgShowUpdated: "Mostrar hora da última atualização"
+        cfgShowUpdated: "Mostrar hora da última atualização",
+        cfgIcon: "Ícone:",
+        iconGauge: "Anel de uso",
+        iconRays: "Raios (estilo Claude)",
+        iconTheme: "Ícone do sistema",
+        iconFileOpt: "Imagem personalizada",
+        iconNone: "Nenhum",
+        cfgChooseIcon: "Escolher ícone…",
+        cfgChooseFile: "Escolher imagem…",
+        cfgImageFilter: "Imagens",
+        cfgBarStyle: "Estilo das barras:",
+        barRounded: "Arredondada",
+        barSquare: "Reta",
+        barSegmented: "Segmentada",
+        barDots: "Pontos",
+        barOutline: "Contorno"
     },
     es: {
         session: "Sesión · 5h",
@@ -67,7 +82,22 @@ const STRINGS = {
         cfgBarHeight: "Grosor de las barras (px):",
         cfgLabels: "Etiquetas:",
         cfgShowLabels: "Mostrar \"5h\" y \"7d\"",
-        cfgShowUpdated: "Mostrar hora de la última actualización"
+        cfgShowUpdated: "Mostrar hora de la última actualización",
+        cfgIcon: "Icono:",
+        iconGauge: "Anillo de uso",
+        iconRays: "Rayos (estilo Claude)",
+        iconTheme: "Icono del sistema",
+        iconFileOpt: "Imagen personalizada",
+        iconNone: "Ninguno",
+        cfgChooseIcon: "Elegir icono…",
+        cfgChooseFile: "Elegir imagen…",
+        cfgImageFilter: "Imágenes",
+        cfgBarStyle: "Estilo de las barras:",
+        barRounded: "Redondeada",
+        barSquare: "Recta",
+        barSegmented: "Segmentada",
+        barDots: "Puntos",
+        barOutline: "Contorno"
     }
 };
 
