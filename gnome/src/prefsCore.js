@@ -2,7 +2,7 @@
 // Usa só widgets do libadwaita 1.2 para funcionar no GNOME 43.
 
 export function buildPrefs(L, window, settings, t) {
-    const {Adw, Gtk, Gio} = L;
+    const {Adw, Gtk, Gio, I18n} = L;
 
     const page = new Adw.PreferencesPage({
         title: t('prefsPage'),
@@ -40,7 +40,18 @@ export function buildPrefs(L, window, settings, t) {
     posRow.connect('notify::selected', () => settings.set_string('panel-position', positions[posRow.selected]));
     panel.add(posRow);
 
+    const langs = ['auto', ...I18n.languages().map(l => l[0])];
+    const langRow = new Adw.ComboRow({
+        title: t('prefsLanguage'),
+        model: Gtk.StringList.new([t('langAuto'), ...I18n.languages().map(l => l[1])]),
+    });
+    langRow.selected = Math.max(0, langs.indexOf(settings.get_string('language')));
+    langRow.connect('notify::selected', () => settings.set_string('language', langs[langRow.selected]));
+    panel.add(langRow);
+
     addSwitch(panel, 'show-icon', t('prefsShowIcon'));
+    addSwitch(panel, 'show-session', t('prefsShowSession'));
+    addSwitch(panel, 'show-weekly', t('prefsShowWeekly'));
     addSwitch(panel, 'show-labels', t('prefsShowLabels'));
     addSwitch(panel, 'show-updated', t('prefsShowUpdated'));
     addSwitch(panel, 'show-seconds', t('prefsShowSeconds'));

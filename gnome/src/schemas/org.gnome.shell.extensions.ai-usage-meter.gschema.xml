@@ -6,9 +6,21 @@
       <default>'right'</default>
       <summary>Posição no painel: left, center ou right</summary>
     </key>
+    <key name="language" type="s">
+      <default>'auto'</default>
+      <summary>Idioma: auto (do sistema), pt ou es</summary>
+    </key>
     <key name="show-icon" type="b">
       <default>true</default>
       <summary>Mostrar o ícone</summary>
+    </key>
+    <key name="show-session" type="b">
+      <default>true</default>
+      <summary>Mostrar o limite de 5h no painel</summary>
+    </key>
+    <key name="show-weekly" type="b">
+      <default>true</default>
+      <summary>Mostrar o limite semanal (7d) no painel</summary>
     </key>
     <key name="show-labels" type="b">
       <default>true</default>

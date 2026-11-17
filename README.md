@@ -81,25 +81,6 @@ Se aparecer **"token expirado"**, abra o Claude Code para ele renovar o login.
 ./build.sh      # cria ai-usage-meter.plasmoid
 ```
 
-## Versão para GNOME (Zorin OS, Ubuntu…)
-
-Também existe uma extensão para o **GNOME Shell**, na pasta [`gnome/`](gnome). Ela deve funcionar no Zorin OS, porque o Zorin Taskbar mostra os indicadores do painel do GNOME. Ainda não foi testada num GNOME de verdade.
-
-Gere os arquivos com `gnome/build.sh` e instale o que corresponde à sua versão do GNOME (veja com `gnome-shell --version`):
-
-| GNOME | Exemplos | Arquivo |
-|---|---|---|
-| 45 a 49 | Zorin OS 18, Ubuntu 24.04+ | `gnome/dist/*-gnome45.shell-extension.zip` |
-| 43 e 44 | Zorin OS 17 | `gnome/dist/*-gnome43.shell-extension.zip` |
-
-```sh
-gnome-extensions install --force gnome/dist/ai-usage-meter@gabrielwsa.github.io-gnome45.shell-extension.zip
-# saia da sessão e entre de novo, depois:
-gnome-extensions enable ai-usage-meter@gabrielwsa.github.io
-```
-
-As preferências ficam no menu da extensão → *Preferências*: posição na barra, ícone, rótulos, hora da última atualização (com ou sem segundos), tamanho das barras e intervalo de atualização. Não precisa de `python3`.
-
 ## Licença
 
 [MIT](LICENSE)
@@ -123,11 +104,3 @@ kpackagetool6 -t Plasma/Applet -i ai-usage-meter.plasmoid
 Después busca **"Medidor de uso de IA"** en la lista de widgets y arrástralo a la barra. Para configurarlo: clic derecho en el widget → *Configurar…*. Puedes elegir el icono (anillo, rayos estilo Claude, icono del sistema o imagen propia), el estilo de las barras (redondeada, recta, segmentada, puntos o contorno), los tamaños y los espacios.
 
 Si aparece **"token expirado"**, abre Claude Code para que renueve la sesión.
-
-**GNOME (Zorin OS, Ubuntu…):** hay una extensión en la carpeta [`gnome/`](gnome), todavía sin probar en un GNOME real. Genera los archivos con `gnome/build.sh` e instala el que corresponde a tu versión (`gnome-shell --version`): `*-gnome45` para GNOME 45–49 (Zorin OS 18) o `*-gnome43` para GNOME 43–44 (Zorin OS 17):
-
-```sh
-gnome-extensions install --force gnome/dist/ai-usage-meter@gabrielwsa.github.io-gnome45.shell-extension.zip
-# cierra sesión y vuelve a entrar, después:
-gnome-extensions enable ai-usage-meter@gabrielwsa.github.io
-```

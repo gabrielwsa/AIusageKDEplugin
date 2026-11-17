@@ -75,7 +75,7 @@ function getIndicatorClass(L) {
             this._settings = opts.settings;
             this._path = opts.path;
             this._openPrefs = opts.openPrefs;
-            this._t = I18n.makeTr(GLib);
+            this._t = I18n.makeTr(GLib, this._settings.get_string('language'));
 
             this._loaded = false;
             this._loading = false;
@@ -92,7 +92,7 @@ function getIndicatorClass(L) {
             this._buildMenu();
             this._applySettings();
 
-            for (const key of ['show-icon', 'show-labels', 'show-updated', 'show-seconds',
+            for (const key of ['show-icon', 'show-session', 'show-weekly', 'show-labels', 'show-updated', 'show-seconds',
                 'bar-width', 'bar-height', 'spacing'])
                 this._settingsIds.push(this._settings.connect(`changed::${key}`, () => this._applySettings()));
             this._settingsIds.push(this._settings.connect('changed::refresh-interval', () => this._startTimers()));
@@ -212,12 +212,17 @@ function getIndicatorClass(L) {
             this._box.style = `spacing: ${s.get_int('spacing')}px;`;
             const bw = s.get_int('bar-width');
             const bh = Math.max(1, s.get_int('bar-height'));
-            for (const chip of this._chips) {
-                chip.label.visible = s.get_boolean('show-labels');
-                chip.bar.visible = bw > 0;
+            const shown = [s.get_boolean('show-session'), s.get_boolean('show-weekly')];
+            this._chips.forEach((chip, i) => {
+                const on = shown[i];
+                chip.label.visible = on && s.get_boolean('show-labels');
+                chip.bar.visible = on && bw > 0;
+                chip.pct.visible = on;
+                if (chip.sep)
+                    chip.sep.visible = shown[0] && shown[1];
                 chip.bar.set_size(bw * sc, bh * sc);
                 chip.bar.style = `border-radius: ${bh / 2}px;`;
-            }
+            });
             for (const row of this._rows)
                 row.bar.set_width(BIG_BAR_WIDTH * sc);
             this._update();
@@ -408,21 +413,24 @@ export class Controller {
         this._L = L;
         this._opts = opts;
         this._indicator = null;
-        this._posId = 0;
+        this._posIds = [];
     }
 
     enable() {
         this._add();
-        this._posId = this._opts.settings.connect('changed::panel-position', () => {
+        const rebuild = () => {
             this._remove();
             this._add();
-        });
+        };
+        // posição e idioma exigem recriar o indicador
+        this._posIds = ['panel-position', 'language']
+            .map(k => this._opts.settings.connect(`changed::${k}`, rebuild));
     }
 
     disable() {
-        if (this._posId)
-            this._opts.settings.disconnect(this._posId);
-        this._posId = 0;
+        for (const id of this._posIds ?? [])
+            this._opts.settings.disconnect(id);
+        this._posIds = [];
         this._remove();
     }
 

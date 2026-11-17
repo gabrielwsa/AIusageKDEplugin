@@ -1,5 +1,5 @@
 // Traduções / Traducciones. Idioma escolhido pelo idioma do sistema:
-// es* → espanhol; qualquer outro → português.
+// es* → espanhol; en* → inglês; qualquer outro → português.
 //
 // Sem imports: o mesmo arquivo serve para o GNOME 45+ (ESM) e 43–44 (o build
 // remove os "export").
@@ -29,6 +29,8 @@ const STRINGS = {
         prefsPanel: 'Na barra',
         prefsData: 'Dados',
         prefsShowIcon: 'Mostrar ícone',
+        prefsShowSession: 'Mostrar limite de 5h',
+        prefsShowWeekly: 'Mostrar limite semanal (7d)',
         prefsShowLabels: 'Mostrar "5h" e "7d"',
         prefsShowUpdated: 'Mostrar hora da última atualização',
         prefsShowSeconds: 'Mostrar segundos na hora',
@@ -36,6 +38,8 @@ const STRINGS = {
         prefsBarHeight: 'Espessura das barras (px)',
         prefsSpacing: 'Espaço entre itens (px)',
         prefsPosition: 'Posição na barra',
+        prefsLanguage: 'Idioma',
+        langAuto: 'Automático (sistema)',
         posLeft: 'Esquerda',
         posCenter: 'Centro',
         posRight: 'Direita',
@@ -64,6 +68,8 @@ const STRINGS = {
         prefsPanel: 'En la barra',
         prefsData: 'Datos',
         prefsShowIcon: 'Mostrar icono',
+        prefsShowSession: 'Mostrar límite de 5h',
+        prefsShowWeekly: 'Mostrar límite semanal (7d)',
         prefsShowLabels: 'Mostrar "5h" y "7d"',
         prefsShowUpdated: 'Mostrar hora de la última actualización',
         prefsShowSeconds: 'Mostrar segundos en la hora',
@@ -71,14 +77,61 @@ const STRINGS = {
         prefsBarHeight: 'Grosor de las barras (px)',
         prefsSpacing: 'Espacio entre elementos (px)',
         prefsPosition: 'Posición en la barra',
+        prefsLanguage: 'Idioma',
+        langAuto: 'Automático (sistema)',
         posLeft: 'Izquierda',
         posCenter: 'Centro',
         posRight: 'Derecha',
         prefsInterval: 'Actualizar cada (segundos)',
     },
+    en: {
+        title: 'Plan usage',
+        session: 'Session · 5h',
+        weekly: 'Weekly · 7d',
+        used: 'used',
+        resetsIn: 'resets in',
+        today: 'today',
+        updated: 'updated',
+        updating: 'updating…',
+        loading: 'loading…',
+        refreshNow: 'Refresh now',
+        preferences: 'Preferences',
+        weeklyScoped: 'weekly',
+        err_login: 'log in to Claude Code',
+        err_expired: 'token expired',
+        err_offline: 'offline',
+        err_http: 'error',
+        err_parse: 'could not read data',
+        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        prefsPage: 'Appearance',
+        prefsPanel: 'In the panel',
+        prefsData: 'Data',
+        prefsShowIcon: 'Show icon',
+        prefsShowSession: 'Show 5h limit',
+        prefsShowWeekly: 'Show weekly limit (7d)',
+        prefsShowLabels: 'Show "5h" and "7d"',
+        prefsShowUpdated: 'Show last update time',
+        prefsShowSeconds: 'Show seconds in the time',
+        prefsBarWidth: 'Bar width (px)',
+        prefsBarHeight: 'Bar thickness (px)',
+        prefsSpacing: 'Spacing between items (px)',
+        prefsPosition: 'Panel position',
+        prefsLanguage: 'Language',
+        langAuto: 'Automatic (system)',
+        posLeft: 'Left',
+        posCenter: 'Center',
+        posRight: 'Right',
+        prefsInterval: 'Refresh every (seconds)',
+    },
 };
 
-export function currentLang(GLib) {
+export function languages() {
+    return [['pt', 'Português'], ['es', 'Español'], ['en', 'English']];
+}
+
+export function currentLang(GLib, pref = 'auto') {
+    if (STRINGS[pref])
+        return pref;
     for (const name of GLib.get_language_names()) {
         const code = String(name).slice(0, 2).toLowerCase();
         if (STRINGS[code])
@@ -87,7 +140,7 @@ export function currentLang(GLib) {
     return 'pt';
 }
 
-export function makeTr(GLib) {
-    const table = STRINGS[currentLang(GLib)];
+export function makeTr(GLib, pref = 'auto') {
+    const table = STRINGS[currentLang(GLib, pref)];
     return key => (table[key] !== undefined ? table[key] : STRINGS.pt[key]);
 }

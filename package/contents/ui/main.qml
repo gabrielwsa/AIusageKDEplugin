@@ -143,9 +143,9 @@ PlasmoidItem {
 
             Repeater {
                 model: [
-                    { label: "5h", used: root.sessionUsed },
-                    { label: "7d", used: root.weeklyUsed }
-                ]
+                    { label: "5h", used: root.sessionUsed, on: compact.cfg.showSession },
+                    { label: "7d", used: root.weeklyUsed, on: compact.cfg.showWeekly }
+                ].filter(m => m.on)
                 delegate: RowLayout {
                     Layout.alignment: Qt.AlignVCenter
                     spacing: Math.max(3, Math.round(compact.cfg.spacing / 2))

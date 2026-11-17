@@ -11,6 +11,7 @@ import {buildPrefs} from './prefsCore.js';
 
 export default class AIUsageMeterPrefs extends ExtensionPreferences {
     fillPreferencesWindow(window) {
-        buildPrefs({Adw, Gtk, Gio}, window, this.getSettings(), I18n.makeTr(GLib));
+        const settings = this.getSettings();
+        buildPrefs({Adw, Gtk, Gio, I18n}, window, settings, I18n.makeTr(GLib, settings.get_string('language')));
     }
 }

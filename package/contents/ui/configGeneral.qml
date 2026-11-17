@@ -19,6 +19,8 @@ KCM.SimpleKCM {
     property alias cfg_barHeight: barHeight.value
     property alias cfg_sidePadding: sidePadding.value
     property alias cfg_showLabels: showLabels.checked
+    property alias cfg_showSession: showSession.checked
+    property alias cfg_showWeekly: showWeekly.checked
     property alias cfg_showUpdated: showUpdated.checked
     property string cfg_iconType
     property string cfg_iconName
@@ -142,6 +144,16 @@ KCM.SimpleKCM {
         }
 
         Item { Kirigami.FormData.isSection: true }
+
+        QQC2.CheckBox {
+            id: showSession
+            Kirigami.FormData.label: t("cfgShown")
+            text: t("cfgShowSession")
+        }
+        QQC2.CheckBox {
+            id: showWeekly
+            text: t("cfgShowWeekly")
+        }
 
         QQC2.CheckBox {
             id: showLabels

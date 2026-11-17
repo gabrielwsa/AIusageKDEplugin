@@ -1,4 +1,4 @@
 *.plasmoid
 __pycache__/
 *.pyc
-gnome/dist/
+gnome/dist/*

@@ -10,6 +10,8 @@
     <entry name="barWidth" type="Int"><default>40</default></entry>
     <entry name="barHeight" type="Int"><default>6</default></entry>
     <entry name="showLabels" type="Bool"><default>true</default></entry>
+    <entry name="showSession" type="Bool"><default>true</default></entry>
+    <entry name="showWeekly" type="Bool"><default>true</default></entry>
     <entry name="showUpdated" type="Bool"><default>true</default></entry>
     <entry name="sidePadding" type="Int"><default>6</default></entry>
     <entry name="iconType" type="String"><default>gauge</default></entry>
